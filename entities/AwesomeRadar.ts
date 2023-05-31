@@ -1,9 +1,9 @@
-import { IAwesomeRadarData } from "../types/IAwesomeRadarData";
+import {IAwesomeRadarData} from "../types/IAwesomeRadarData";
 import {IRadarData} from "../types/IRadarData";
 import {Radar} from "../types/Radar";
 
 export class AwesomeRadar implements Radar {
-  constructor() {}
+  constructor() { }
 
   parse(data: IAwesomeRadarData): IRadarData {
     return {
@@ -14,5 +14,9 @@ export class AwesomeRadar implements Radar {
         license: `${incident[0]}`
       }))
     }
+  }
+
+  isSupported(data: any): boolean {
+    return !!data.incidents && !!data.metadata;
   }
 }
