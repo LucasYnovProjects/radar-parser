@@ -1,5 +1,5 @@
 import {Radar} from "../models/Radar";
-import {RadarIncident} from "../models/RadarIncident";
+import {IRadarIncident, RadarIncident} from "../models/RadarIncident";
 import {RadarLocalisation} from "../models/RadarLocalisation";
 import {RadarParser} from "../types/RadarParser";
 
@@ -18,15 +18,15 @@ interface IB612Report {
 
 export class B612Radar implements RadarParser {
   parse(data: IB612): Radar {
-    const results: RadarIncident[] = [];
-    const localisation = new RadarLocalisation(data.localisation);
+    const results: IRadarIncident[] = [];
+    const localisation = data.localisation;
     data.reports.forEach((element: IB612Report) => {
-      const incident = new RadarIncident({
+      const incident = {
         speed: parseInt(element.speed.replace('km/h', '')),
         license: element.licensePlate,
-        date: new Date(element.date),
+        date: element.date,
         evidenceUrl: element.evidenceUrl
-      });
+      };
 
       results.push(incident);
     });

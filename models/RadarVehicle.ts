@@ -5,15 +5,15 @@ export interface IRadarVehicle {
 
 export class RadarVehicle {
   constructor(
-    private readonly vehicle: IRadarVehicle
+    private readonly vehicle: IRadarVehicle | undefined
   ) { }
 
   type(): string | undefined {
-    return this.vehicle.type;
+    return this.vehicle?.type;
   }
 
   brand(): string | undefined {
-    return this.vehicle.brand;
+    return this.vehicle?.brand;
   }
 
   value(): IRadarVehicle {

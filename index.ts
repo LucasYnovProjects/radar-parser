@@ -3,6 +3,7 @@ import {RadarFactory} from './radars/RadarFactory';
 import {Radar} from './models/Radar';
 import {RadarFormatNotSupported} from './radars/errors/RadarFormatNotSupported';
 import bodyParser from "body-parser";
+import findIncidentByDate from './queries/findIncidentByDate';
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -15,8 +16,20 @@ app.post('/', bodyParser.text({type: "application/xml"}), (req: Request, res: Re
   try {
     const radar: Radar = adapter.parse();
     const data = radar.value();
-
     res.json(data);
+  } catch (err) {
+    if (err instanceof RadarFormatNotSupported) {
+      return res.status(501).send("Can't parse data, because format is not implemented")
+    }
+    res.send(err);
+  }
+});
+
+app.get('/', (req: Request, res: Response) => {
+  const {date} = req.body;
+  try {
+    const incidents = findIncidentByDate(date);
+    res.json(incidents);
   } catch (err) {
     if (err instanceof RadarFormatNotSupported) {
       return res.status(501).send("Can't parse data, because format is not implemented")

@@ -17,10 +17,10 @@ interface IAwesomeRadarData {
 
 export class AwesomeRadar implements RadarParser {
   parse(data: IAwesomeRadarData): Radar {
-    const localisation = new RadarLocalisation(data.metadata.localisation);
-    const incidents = data.incidents.map((incident) => new RadarIncident({
+    const localisation = data.metadata.localisation;
+    const incidents = data.incidents.map((incident) => ({
       speed: data.metadata.speedThreshold,
-      date: new Date(incident[1]),
+      date: incident[1],
       license: `${incident[0]}`
     }));
     return new Radar(localisation, incidents);

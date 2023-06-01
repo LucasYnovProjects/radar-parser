@@ -1,11 +1,11 @@
-import {RadarVehicle} from "./RadarVehicle";
+import {IRadarVehicle, RadarVehicle} from "./RadarVehicle";
 
-interface IRadarIncident {
+export interface IRadarIncident {
   speed: number,
   license: string,
-  date: Date,
+  date: string,
   evidenceUrl?: string,
-  vehicle?: RadarVehicle
+  vehicle?: IRadarVehicle
 }
 
 export class RadarIncident {
@@ -22,7 +22,7 @@ export class RadarIncident {
   }
 
   date(): Date {
-    return this.incident.date;
+    return new Date(this.incident.date);
   }
 
   evidenceUrl(): string | undefined {
@@ -30,7 +30,7 @@ export class RadarIncident {
   }
 
   vehicle(): RadarVehicle | undefined {
-    return this.incident.vehicle;
+    return new RadarVehicle(this.incident.vehicle);
   }
 
   value() {
