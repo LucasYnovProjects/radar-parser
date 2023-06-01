@@ -14,7 +14,9 @@ app.post('/', bodyParser.text({type: "application/xml"}), (req: Request, res: Re
   const adapter = new RadarFactory(req.body);
   try {
     const radar: Radar = adapter.parse();
-    res.json(radar.value());
+    const data = radar.value();
+
+    res.json(data);
   } catch (err) {
     if (err instanceof RadarFormatNotSupported) {
       return res.status(501).send("Can't parse data, because format is not implemented")
