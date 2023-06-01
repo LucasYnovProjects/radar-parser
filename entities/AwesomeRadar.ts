@@ -17,6 +17,7 @@ export class AwesomeRadar implements Radar {
   }
 
   isSupported(data: any): boolean {
-    return !!data.incidents && !!data.metadata;
+    const keys: String[] = Object.keys(data);
+    return !!data.incidents && !!data.metadata && keys.length === 2;
   }
 }
