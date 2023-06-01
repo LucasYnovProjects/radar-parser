@@ -1,7 +1,6 @@
 import express, { Response, Request, Application } from "express";
 import { Reporter2000XML } from "./entities/Reporter2000XML";
 import bodyParser from "body-parser";
-import bodyParserXml from "body-parser-xml";
 import xml2js from "xml2js";
 
 const app: Application = express();
