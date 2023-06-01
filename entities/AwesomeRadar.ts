@@ -18,6 +18,6 @@ export class AwesomeRadar implements Radar {
 
   isSupported(data: any): boolean {
     const keys: String[] = Object.keys(data);
-    return !!data.incidents && !!data.metadata && keys.length === 2;
+    return keys.length === 2 && !!data.incidents && !!data.metadata;
   }
 }

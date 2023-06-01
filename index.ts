@@ -7,6 +7,7 @@ const app: Application = express();
 const PORT: number = 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.post('/', (req: Request, res: Response) => {
   const adapter = new RadarAdapter(req.body);

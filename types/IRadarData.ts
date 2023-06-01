@@ -3,7 +3,7 @@ interface IRadarVehicle {
   brand?: string,
 }
 
-interface IRadarIncident {
+export interface IRadarIncident {
   speed: number,
   license: string,
   date: Date,
