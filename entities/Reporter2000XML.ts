@@ -1,5 +1,5 @@
 import {Radar} from "../types/Radar";
-import {IRadarData} from "../types/IRadarData";
+import {IRadarData, IRadarIncident} from "../types/IRadarData";
 import convert from "xml-js";
 import {IReporter2000Data} from "../types/IReporter2000Data";
 export class Reporter2000XML implements Radar {
@@ -11,7 +11,7 @@ export class Reporter2000XML implements Radar {
   }
 
   getIncidentsByDate = (xmlIncident: any) => {
-    const incidents = [];
+    const incidents: IRadarIncident[] = [];
     let drivers = xmlIncident.driver;
     const date = xmlIncident._attributes.day;
 
@@ -22,8 +22,8 @@ export class Reporter2000XML implements Radar {
     for (let i = 0; i < drivers.length; i++) {
       const driver = drivers[i]._attributes;
       const {speed, license, brand, type} = driver;
-      const incident = {
-        speed,
+      const incident: IRadarIncident = {
+        speed: Number(speed),
         license,
         date,
         vehicle: {
