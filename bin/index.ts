@@ -1,10 +1,15 @@
 #! /usr/bin/env node
-import fetchAll from './fetchAll';
-import yargs, { } from 'yargs';
+import yargs from 'yargs';
+import getAllIncidentsCommand from './commands/getAllIncidentsCommand';
+import getIncidentsByLicenseCommand from './commands/getIncidentsByLicenseCommand';
+import getIncidentsByDateCommand from './commands/getIncidentsByDateCommand';
 
 const usage = '\nUsage: radar-parser <action>';
-const options = yargs
+yargs
+  .scriptName("radar-parser")
   .usage(usage)
-  .command('fetchAll', 'Fetch all incidents', (argv) => fetchAll())
-  .help(true)
+  .command(...getAllIncidentsCommand)
+  .command(...getIncidentsByDateCommand)
+  .command(...getIncidentsByLicenseCommand)
+  .help()
   .argv;

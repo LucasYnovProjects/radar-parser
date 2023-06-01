@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "watch:api": "tsc -w index.ts",
     "dev": "nodemon index.ts"
   },
   "author": "",

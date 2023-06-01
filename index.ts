@@ -3,7 +3,7 @@ import {RadarFactory} from './radars/RadarFactory';
 import {Radar} from './models/Radar';
 import {RadarFormatNotSupported} from './radars/errors/RadarFormatNotSupported';
 import bodyParser from "body-parser";
-import findIncidentByDate from './queries/findIncidentByDate';
+import findIncidentByDate from './queries/getIncidentsByDate';
 
 const app: Application = express();
 const PORT: number = 3000;

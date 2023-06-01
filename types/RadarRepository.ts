@@ -1,5 +1,7 @@
 import {IRadarIncident} from "../models/RadarIncident";
 
 export interface RadarRepository {
-  findByDate(date: string): IRadarIncident[]
+  getAllIncidents(): IRadarIncident[],
+  getIncidentsByDate(date: string): IRadarIncident[],
+  getIncidentsByLicense(license: string): IRadarIncident[],
 }
