@@ -30,8 +30,12 @@ interface IReporter2000Data {
 
 export class Reporter2000XML implements RadarParser {
   isSupported(data: any): boolean {
-    const json: IReporter2000Data = this.toJson(data);
-    return !!json.localisation && !!json.localisation._attributes && !!json.localisation.date;
+    try {
+      const json: IReporter2000Data = this.toJson(data);
+      return !!json.localisation && !!json.localisation._attributes && !!json.localisation.date;
+    } catch (err) {
+      return false;
+    }
   }
 
   getIncidentsByDate = (xmlIncident: any) => {

@@ -21,7 +21,7 @@ app.post('/', bodyParser.text({type: "application/xml"}), (req: Request, res: Re
     if (err instanceof RadarFormatNotSupported) {
       return res.status(501).send("Can't parse data, because format is not implemented")
     }
-    return err;
+    res.send(err);
   }
 });
 
