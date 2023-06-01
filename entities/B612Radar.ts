@@ -12,7 +12,7 @@ export class B612Radar implements Radar {
       results.push(
         {
           speed: parseInt(element.speed.replace('km/h', '')),
-          license: element.licencePlate,
+          license: element.licensePlate,
           date: new Date(element.date),
           evidenceUrl: element.evidenceUrl
         }

@@ -5,7 +5,7 @@ export interface IB612 {
 }
 
 export interface IB612Report {
-  licencePlate: string,
+  licensePlate: string,
   speed: string,
   date: string,
   evidenceUrl: string
