@@ -1,7 +1,8 @@
 import express, {Response, Request, Application} from 'express';
 import {RadarAdapter} from './entities/RadarAdapter';
 import {IRadarData} from './types/IRadarData';
-import {RadarFormatNotSupported} from './entities/RadarFormatNotSupported';
+import {RadarFormatNotSupported} from './entities/errors/RadarFormatNotSupported';
+import bodyParser from "body-parser";
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -9,7 +10,7 @@ const PORT: number = 3000;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.post('/', (req: Request, res: Response) => {
+app.post('/', bodyParser.text({type: "application/xml"}), (req: Request, res: Response) => {
   const adapter = new RadarAdapter(req.body);
   try {
     const data: IRadarData = adapter.parse();
