@@ -4,6 +4,8 @@ import {Radar} from './models/Radar';
 import {RadarFormatNotSupported} from './radars/errors/RadarFormatNotSupported';
 import bodyParser from "body-parser";
 import findIncidentByDate from './queries/getIncidentsByDate';
+import { InMemoryRadarRepository } from './repositories/InMemoryRadarRepository';
+import { PDFMaker } from './models/PDFMaker';
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -37,6 +39,14 @@ app.get('/', (req: Request, res: Response) => {
     res.send(err);
   }
 });
+
+app.get("/test", (req: Request, res: Response) => {
+  const repo = new InMemoryRadarRepository();
+  const data = repo.getAllIncidents();
+  const pdfMaker = new PDFMaker(data);
+  pdfMaker.generateReport();
+  res.send("ok")
+})
 
 app.listen(PORT, () => {
   console.log(`Running on http://localhost:${PORT}`);
