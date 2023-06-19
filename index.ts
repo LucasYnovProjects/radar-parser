@@ -5,7 +5,7 @@ import {RadarFormatNotSupported} from './radars/errors/RadarFormatNotSupported';
 import bodyParser from "body-parser";
 import findIncidentByDate from './queries/getIncidentsByDate';
 import {InMemoryRadarRepository} from './repositories/InMemoryRadarRepository';
-import {PDFExporter} from './models/PDFExporter';
+import {PDFExporter} from './models/pdf/PDFExporter';
 
 const app: Application = express();
 const PORT: number = 3000;
