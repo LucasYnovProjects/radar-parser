@@ -4,8 +4,8 @@ import {Radar} from './models/Radar';
 import {RadarFormatNotSupported} from './radars/errors/RadarFormatNotSupported';
 import bodyParser from "body-parser";
 import findIncidentByDate from './queries/getIncidentsByDate';
-import { InMemoryRadarRepository } from './repositories/InMemoryRadarRepository';
-import { PDFMaker } from './models/PDFMaker';
+import {InMemoryRadarRepository} from './repositories/InMemoryRadarRepository';
+import {PDFExporter} from './models/PDFExporter';
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -33,9 +33,6 @@ app.get('/', (req: Request, res: Response) => {
     const incidents = findIncidentByDate(date);
     res.json(incidents);
   } catch (err) {
-    if (err instanceof RadarFormatNotSupported) {
-      return res.status(501).send("Can't parse data, because format is not implemented")
-    }
     res.send(err);
   }
 });
@@ -43,7 +40,7 @@ app.get('/', (req: Request, res: Response) => {
 app.get("/test", (req: Request, res: Response) => {
   const repo = new InMemoryRadarRepository();
   const data = repo.getAllIncidents();
-  const pdfMaker = new PDFMaker(data);
+  const pdfMaker = new PDFExporter(data);
   pdfMaker.generateReport();
   res.send("ok")
 })
